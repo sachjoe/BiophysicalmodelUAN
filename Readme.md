@@ -1,7 +1,7 @@
 README file for 'A Biophysically Comprehensive Model of
 Urothelial Afferent Neurons: Implications for
 Sensory Signalling in Urinary Bladder' -Aruljothi & Manchanda
-
+---
 
 NEURON in Windows
 1. Locate and launch NEURON'S mknrndll tool from the Windows start menu. 
