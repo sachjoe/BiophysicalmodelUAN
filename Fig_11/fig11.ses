@@ -1,0 +1,109 @@
+{load_file("nrngui.hoc")}
+objectvar save_window_, rvp_
+objectvar scene_vector_[5]
+objectvar ocbox_, ocbox_list_, scene_, scene_list_
+{ocbox_list_ = new List()  scene_list_ = new List()}
+{pwman_place(0,0,0)}
+
+//Begin PointProcessManager
+{
+load_file("pointman.hoc")
+}
+{
+soma ocbox_ = new PointProcessManager(0)
+}
+{object_push(ocbox_)}
+{
+mt.select("IClamp") i = mt.selected()
+ms[i] = new MechanismStandard("IClamp")
+ms[i].set("del", 0, 0)
+ms[i].set("dur", 0, 0)
+ms[i].set("amp", 0, 0)
+mt.select("VClamp") i = mt.selected()
+ms[i] = new MechanismStandard("VClamp")
+ms[i].set("dur", 4.74, 0)
+ms[i].set("dur", 250, 1)
+ms[i].set("dur", 5, 2)
+ms[i].set("amp", -60, 0)
+ms[i].set("amp", 10, 1)
+ms[i].set("amp", -60, 2)
+ms[i].set("gain", 100000, 0)
+ms[i].set("rstim", 1, 0)
+ms[i].set("tau1", 0.001, 0)
+ms[i].set("tau2", 0, 0)
+ms[i].set("e0", -0.000113657, 0)
+ms[i].set("vo0", 11.3657, 0)
+ms[i].set("vi0", 9.99977, 0)
+ms[i].set("fac", 0, 0)
+mt.select("VClamp") i = mt.selected() maction(i)
+hoc_ac_ = 0.5
+sec.sec move() d1.flip_to(0)
+}
+{object_pop() doNotify()}
+{
+ocbox_ = ocbox_.v1
+ocbox_.map("PointProcessManager", -4, 612, 379.8, 829.8)
+}
+objref ocbox_
+//End PointProcessManager
+
+
+//Begin MulRunFitter[0]
+{
+load_file("mulfit.hoc", "MulRunFitter")
+}
+{
+ocbox_ = new MulRunFitter(1)
+}
+{object_push(ocbox_)}
+{
+version(6)
+ranfac = 2
+fspec = new File("fig11.ses.ft1")
+fdat = new File("fig11.ses.fd1")
+read_data()
+build()
+}
+opt.set_optimizer("MulfitPraxWrap")
+{object_push(opt.optimizer)}
+{
+nstep = 1
+}
+{object_pop()}
+{p.gengui(0, 394, 34, 1479.6, 724.5)}
+{p.showargs(566, 828, 1756.8, 709.2)}
+{optrestore(884, 796, 459, 657.9)}
+{object_pop()}
+{
+ocbox_.map("MulRunFitter[0]", 1052, 770, 963, 869.4)
+}
+objref ocbox_
+//End MulRunFitter[0]
+
+{
+xpanel("RunControl", 0)
+v_init = -73
+xvalue("Init","v_init", 1,"stdinit()", 1, 1 )
+xbutton("Init & Run","run()")
+xbutton("Stop","stoprun=1")
+runStopAt = 5
+xvalue("Continue til","runStopAt", 1,"{continuerun(runStopAt) stoprun=1}", 1, 1 )
+runStopIn = 1
+xvalue("Continue for","runStopIn", 1,"{continuerun(t + runStopIn) stoprun=1}", 1, 1 )
+xbutton("Single Step","steprun()")
+t = 17.2
+xvalue("t","t", 2 )
+tstop = 17
+xvalue("Tstop","tstop", 1,"tstop_changed()", 0, 1 )
+dt = 0.025
+xvalue("dt","dt", 1,"setdt()", 0, 1 )
+steps_per_ms = 40
+xvalue("Points plotted/ms","steps_per_ms", 1,"setdt()", 0, 1 )
+screen_update_invl = 0.05
+xvalue("Scrn update invl","screen_update_invl", 1,"", 0, 1 )
+realtime = 0.04
+xvalue("Real Time","realtime", 0,"", 0, 1 )
+xpanel(-2,135)
+}
+objectvar scene_vector_[1]
+{doNotify()}

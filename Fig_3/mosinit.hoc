@@ -1,0 +1,7 @@
+load_file("nrngui.hoc")
+load_file("morphology.hoc")
+load_file("fig3.ses")
+
+finitialize()
+continuerun(17)
+

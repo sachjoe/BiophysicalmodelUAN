@@ -1,0 +1,240 @@
+
+load_file("nrngui.hoc")
+load_file("tautables.hoc")
+
+
+nrncontrolmenu()
+
+v_init = -73 
+tstop = 200
+
+create soma
+soma{
+	L	 = 20.7
+	diam = 20.7 
+	nseg = 1
+	cm	 = 18/(3.14* diam^2 )* 100 
+	celsius = 22 
+	Ra 	    = 100 
+}
+
+create tstem
+tstem{
+	diam = 1.4
+	L 	 = 75
+	Ra	 = 100
+	cm   = 1		
+	nseg = int((L /(0.1*lambda_f(100))+0.9)/2)*2 + 1    
+}
+
+create paxon, caxon
+
+connect soma(0), tstem(1)
+connect tstem(0), paxon(1)
+
+connect caxon(1),paxon(1)
+
+paxon.diam = 0.8
+caxon.diam = 0.4  
+
+forsec "axon" {
+	L = 5000
+	Ra = 100
+	cm = 1	
+	nseg = int((L/(0.1*lambda_f(100))+0.9)/2)*2 + 1 
+	
+}
+
+
+forall{
+	//Passive Channel
+	insert pas
+	g_pas = 0.0001
+	e_pas = -41.583 
+	
+	//Na Channels
+	insert nattxs
+	insert nav1p8
+	insert nav1p9
+	
+	// K+ Currents
+	insert kaslow
+	insert kdr 
+	
+	insert hcn 
+	eh = -30
+	
+	//Calcium Channels
+	insert CaL
+	insert CaN
+	insert CaPQ
+	insert CaR
+	insert CaT
+	
+	cai0_ca_ion = 136e-6
+	cao0_ca_ion = 2 // Previously used 10.3   2.5 = default value. 
+	
+	//For thayer 1990 (A-delta neurons) = 2
+	cai = 136e-6 // ?? Remove either these statements or cai_ca_ion
+	cao = 2 //
+	
+	insert bkca
+	
+	insert kmtype
+	insert knatype
+
+	insert nakpump // NaK Pump
+    capm_nakpump = cm(0.5) // Check this line
+    
+	insert skca3
+    
+    insert cadyn   // new calcium dynamics mechanism
+	//Ca Concentration initialization
+	cai0_cadyn = cai
+	cao0_cadyn = cao
+	
+	//Ca Diffusion Coefficient
+	DCa_cadyn=0.6 
+	
+	//Cytoplasmic Ca buffering
+	bbr_cadyn = 370 
+	
+	//ER Ca Concentration
+	caeri = 0.4
+	caeri0_cadyn =0.4  //
+	
+	//ER Buffering
+	Kmer_cadyn = 0.5
+	Bmer_cadyn =  10
+		
+	//Mitochondria Ca Concentration
+	camti = 200e-6 
+	camti0_cadyn = 200e-6	// 200 nM 
+	
+	//Mito Buffer
+	Kmmt_cadyn = 0.01e-3
+	Bmmt_cadyn = 0.065
+	
+	// PMCA
+	//PMCA Parameters
+	soma.k1_cadyn = 3.74e7
+	soma.k2_cadyn = 2.5e5
+	soma.k3_cadyn = 500
+	soma.k4_cadyn = 5
+	
+	//SERCA
+	soma.kpsr_cadyn = 0.00027
+	
+	//IP3R SR values from Fink et al., 
+	soma.jmaxsr_cadyn = 3.5e-6 //ca Dynamics pdf Thayer
+	soma.kip3_cadyn = 0.0008 
+	soma.kactip3_cadyn = 0.0003
+	soma.konip3_cadyn = 2.7
+	soma.kinhip3_cadyn = 0.0002
+	
+	//CICR
+	// :Koch - Ch6- E de. Schutter pg34 (Purkinje Cell)
+	soma.kcicr_cadyn = 0.00198 // Lokutta 1998/9
+	soma.vcicr_cadyn = 5e-07
+	soma.ktcicr_cadyn = 0.0006
+	
+	//Mitochondria
+	//MCU
+	soma.vmcu_cadyn= 1.446825e-6 // 02-05-2018 
+	soma.kmcu_cadyn = 606e-6
+	
+	//MNCX
+	soma.vncx_cadyn = 6e-5
+	soma.kna_cadyn = 8
+	soma.kncx_cadyn = 0.035
+
+	
+	// ANO1 CACC activating Ca Concentration
+	// caip3ri is the ca change by ca rel. by outmost shell's IP3Rs read by ANO1 CACC
+	caip3ri = cai
+	
+	insert ip3dif
+	ip3i0_ip3dif=0.16e-3
+	DIP3_ip3dif =0.283	
+	kdegr_ip3dif= 0.14e-3
+
+    insert ncxsoma
+	
+	ki0_k_ion = 140 // See chapter 8 NEURON Book -Initializing concentrations in hoc page 10 - It is a GLOBAL variable sets the inital conc
+	ko0_k_ion = 5
+	
+	nai0_na_ion = 10
+	nao0_na_ion = 150
+	
+	ko=5
+	ki=140
+	nao=150
+	nai=10
+	
+	ek=  -84.7
+	ena= 68.83 
+	
+	// Calcium activated chloride channel
+	insert cacc 
+
+	cli0_cl_ion = 40
+	clo0_cl_ion = 145 // Delpire and Staley, 2014
+	cli = 40		  // Deba and  Besac, 2015   //8
+	clo = 145		  // gives ecl = -32.7
+	ecl = -32.7
+	
+	insert soce // Store operated calcium channel added on 29-10-2016
+
+	insert trpm8
+	insert pasnew
+	Ives = (soma.ica(0.5)+soma.icl(0.5)+soma.ih(0.5)+soma.ik(0.5)+soma.ina(0.5)+soma.i_pas(0.5)*area(0.5)*0.01)
+	
+
+}
+
+soma.g_pas		= 0.0001
+
+soma.gbar_nattxs	= 0.0114
+soma.gbar_nav1p8	= 1.2197e-008
+soma.gbar_nav1p9	= 0.0006
+
+soma.gbar_kaslow	= 0.0025637
+soma.gbar_kdr		= 0.00019782
+
+soma.gbarfast_hcn	= 0.00028253
+soma.gbarslow_hcn	= 7.6027e-005
+
+soma.pmax_CaL 		= 0.00035
+soma.pmax_CaN   	= 2.8e-005
+soma.pmax_CaPQ  	= 8e-006
+soma.pmax_CaR  		= 1e-008
+soma.pmax_CaT  		= 8.5017e-006
+
+soma.gbar_kmtype  	= 1.9991e-007
+soma.gbar_knatype  	= 0.0062249
+soma.gbar_nakpump	= 0.001
+
+soma.gbar_bkca  	= 2.965e-005
+soma.gbar_skca3		= 0.008
+
+soma.gbar_cacc		= 0.00080427
+
+soma.ImaxNax_ncxsoma= 1.1e-05
+soma.gbar_trpm8		= 0.027336
+soma.pmax_soce		= 2.1011e-005
+
+// cadyn.mod parameters
+soma.pump0_cadyn 	= 4.232e-13		//PMCA
+
+//Calcium Dynamics Parameters
+//ER Parameters
+soma.vmaxsr_cadyn 	= 3.75e-06   //SERCA
+soma.jmaxsr_cadyn 	= 3.5e-6    //IP3R 
+soma.vcicr_cadyn 	= 5e-07    //CICR
+
+//Mitochondria
+soma.vmcu_cadyn		= 1.4468e-6 //MCU
+soma.vncx_cadyn 	= 6e-5 		  //MNCX */
+
+
+

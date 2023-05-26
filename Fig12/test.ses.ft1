@@ -1,0 +1,6 @@
+ParmFitness: Unnamed multiple run protocol
+	FitnessGenerator: vc
+		RegionFitness:	soma.itotal_pasnew( 0.5 )
+
+	Parameters:
+End ParmFitness

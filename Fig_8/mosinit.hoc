@@ -1,0 +1,131 @@
+load_file("nrngui.hoc")
+load_file("morphology.hoc")
+//load_file("graphs_functions.hoc")
+//load_file("APfit.ses")
+//load_file("IparAPfit.ses")
+//load_file("iclamp.ses")
+//load_file("Vclamp10fit.ses")
+load_file("ap.ses")
+/* xpanel("Mandge & Manchanda 2018")
+  xbutton("Generate Fig 9A", "{xopen(\"fig9A.hoc\") init() run()}")
+  xbutton("Generate Fig 16 A, C, D", "generate16acd()")
+  xbutton("Quit between different figure simulations","quit()")
+xpanel()
+
+proc generate16acd() {
+  xopen("fig16ACD.hoc")
+  init()
+  run()
+  gbar_skca3=0.0027
+  init()
+  run()
+  gbar_skca3=0.0045
+  init()
+  run()
+} */
+
+/*
+ objref vgraph
+vgraph = new Graph(0)
+vgraph.addexpr("soma.v(0.5)",1,2)
+vgraph.view(0, -90, 40, 160, 1099, 60, 300.24, 200.1)
+graphList[0].append(vgraph)
+vgraph.exec_menu("Keep Lines")
+
+objref multiclamp
+soma multiclamp = new IClamp(0.5)
+multiclamp.del = 200
+multiclamp.dur = 250
+multiclamp.amp = -.012
+
+objref igraph
+igraph = new Graph(0)
+igraph.addexpr("multiclamp.i",1,2)
+igraph.view(0, -1, 40, 16, 1084, 502, 300.24, 200.1)
+graphList[1].append(igraph)
+igraph.exec_menu("Keep Lines")
+
+numlevels = 51
+increment = .0020
+
+for i=0,numlevels-1{
+	multiclamp.amp = multiclamp.amp + increment	
+	run()
+}  
+
+*/
+/*
+{
+xpanel("Channel Parameters", 0)
+xlabel("Channel Parameters")
+xvalue("g_pas","soma.g_pas(0.5)", 1,"soma.g_pas(0.5)", 0, 0 )
+xvalue("pmax_soce","soma.pmax_soce(0.5)", 1,"soma.pmax_soce(0.5)", 0, 0 )
+xvalue("gbar_trpm8","soma.gbar_trpm8(0.5)", 1,"soma.gbar_trpm8(0.5)", 0, 0 )
+
+xvalue("gbar_nattxs","soma.gbar_nattxs(0.5)", 1,"soma.gbar_nattxs(0.5)", 0, 0 )
+xvalue("gbar_nav1p8","soma.gbar_nav1p8(0.5)", 1,"soma.gbar_nav1p8(0.5)", 0, 0 )
+xvalue("gbar_nav1p9","soma.gbar_nav1p9(0.5)", 1,"soma.gbar_nav1p9(0.5)", 0, 0 )
+xvalue("gbar_kaslow","soma.gbar_kaslow(0.5)", 1,"soma.gbar_kaslow(0.5)", 0, 0 )
+xvalue("gbar_kdr","soma.gbar_kdr(0.5)", 1,"soma.gbar_kdr(0.5)", 0, 0 )
+xvalue("gbar_kmtype","soma.gbar_kmtype(0.5)", 1,"soma.gbar_kmtype(0.5)", 0, 0 )
+xvalue("gbar_knatype","soma.gbar_knatype(0.5)", 1,"soma.gbar_knatype(0.5)", 0, 0 )
+xvalue("gbarfast_hcn ","soma.gbarfast_hcn(0.5)", 1,"gbarfast_hcn(0.5)", 0, 0 )
+xvalue("gbarslow_hcn ","soma.gbarslow_hcn(0.5)", 1,"gbarslow_hcn(0.5)", 0, 0 )
+xvalue("gbar_bkca","soma.gbar_bkca(0.5)", 1,"soma.gbar_bkca(0.5)", 0, 0 )
+
+xvalue("pmax_CaT","soma.pmax_CaT(0.5)", 1,"soma.pmax_CaT(0.5)", 0, 0 )
+xvalue("pmax_CaL","soma.pmax_CaL(0.5)", 1,"soma.pmax_CaL(0.5)", 0, 0 )
+xvalue("pmax_CaN","soma.pmax_CaN(0.5)", 1,"soma.pmax_CaN(0.5)", 0, 0 )
+xvalue("pmax_CaPQ","soma.pmax_CaPQ(0.5)", 1,"soma.pmax_CaPQ(0.5)", 0, 0 )
+xvalue("pmax_CaR","soma.pmax_CaR(0.5)", 1,"soma.pmax_CaR(0.5)", 0, 0 )
+xvalue("gbar_cacc","soma.gbar_cacc(0.5)", 1,"soma.gbar_cacc(0.5)", 0, 0 )
+xvalue("gbar_nakpump","soma.gbar_nakpump(0.5)", 1,"soma.gbar_nakpump(0.5)", 0, 0 )
+xvalue("ImaxNax_ncxsoma","soma.ImaxNax_ncxsoma(0.5)", 1,"soma.ImaxNax_ncxsoma(0.5)", 0, 0 )
+xvalue("gbar_skca3","soma.gbar_skca3(0.5)", 1,"soma.gbar_skca3(0.5)", 0, 0 )
+xvalue("gbar_trpm8","soma.gbar_trpm8(0.5)", 1,"soma.gbar_trpm8(0.5)", 0, 0 )
+xpanel(1696,414)
+}
+
+objref graphcurr
+{
+graphcurr = new Graph(0)
+graphcurr.size(-100,10000,-0.0016,0.0022)
+{graphcurr.view(-100, -0.05, 8600, 0.13, 1058, 28, 299.52, 199.38)}
+graphList[1].append(graphcurr)
+graphcurr.save_name("graphList[1].")
+graphcurr.addexpr("soma.icl(0.5)", 2, 1, 0.8, 0.9, 2)
+graphcurr.addexpr("soma.ina(0.5)", 3, 1, 0.8, 0.9, 2)
+graphcurr.addexpr("soma.ik(0.5)", 5, 1, 0.8, 0.9, 2)
+graphcurr.addexpr("soma.ica(0.5)", 6, 1, 0.8, 0.9, 2)
+graphcurr.addexpr("soma.ih(0.5)", 1, 1, 0.8, 0.9, 2)
+graphcurr.addexpr("soma.i_pas(0.5)", 7, 1, 0.8, 0.9, 2)
+}
+
+objref graphik
+{
+graphik = new Graph(0)
+graphik.size(-100,10000,-0.0016,0.0022)
+{graphik.view(-100, -0.05, 8600, 0.13, 1058, 28, 299.52, 199.38)}
+graphList[1].append(graphik)
+graphik.save_name("graphList[1].")
+graphik.addexpr("soma.ik_kaslow(0.5)", 2, 1, 0.8, 0.9, 2)
+graphik.addexpr("soma.ik_kdr(0.5)", 3, 1, 0.8, 0.9, 2)
+graphik.addexpr("soma.ik_bkca(0.5)", 5, 1, 0.8, 0.9, 2)
+graphik.addexpr("soma.ik_kmtype(0.5)", 6, 1, 0.8, 0.9, 2)
+graphik.addexpr("soma.ik_knatype(0.5)", 1, 1, 0.8, 0.9, 2)
+graphik.addexpr("soma.ik_skca3(0.5)", 9, 1, 0.8, 0.9, 2)
+graphik.addexpr("soma.icl_cacc(0.5)", 7, 1, 0.8, 0.9, 2)
+}
+
+objref graphina
+{
+graphina = new Graph(0)
+graphina.size(-100,10000,-0.0016,0.0022)
+{graphina.view(-100, -0.05, 8600, 0.13, 500, 28, 300, 199)}
+graphList[1].append(graphina)
+graphina.save_name("graphList[1].")
+graphina.addexpr("soma.ina_nattxs(0.5)", 2, 1, 0.8, 0.9, 2)
+graphina.addexpr("soma.ina_nav1p8(0.5)", 3, 1, 0.8, 0.9, 2)
+graphina.addexpr("soma.ina_nav1p9(0.5)", 5, 1, 0.8, 0.9, 2)
+}	
+*/ 

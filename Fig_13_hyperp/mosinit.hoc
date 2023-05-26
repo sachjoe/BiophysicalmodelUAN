@@ -1,0 +1,6 @@
+load_file("nrngui.hoc")
+load_file("morphology.hoc")
+load_file("nuan_dep.ses") // for the NUAN dep for matching with the experiment
+
+finitialize()
+continuerun(1400)

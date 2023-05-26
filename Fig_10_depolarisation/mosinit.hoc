@@ -1,0 +1,45 @@
+load_file("nrngui.hoc")
+load_file("morphology.hoc")
+load_file("rebound.ses")
+
+finitialize()
+continuerun(1400)
+
+{
+xpanel("Channel Parameters", 0)
+xlabel("Channel Parameters")
+xvalue("g_pas","soma.g_pas(0.5)", 1,"soma.g_pas(0.5)", 0, 0 )
+xvalue("pmax_soce","soma.pmax_soce(0.5)", 1,"soma.pmax_soce(0.5)", 0, 0 )
+xvalue("gmax_hh1","soma.gmax_hh1(0.5)", 1,"soma.gmax_hh1(0.5)", 0, 0 )
+xvalue("soma.gnabar_nav17","soma.gnabar_nav17(0.5)", 1,"soma.gnabar_nav17(0.5)", 0, 0 )
+
+xvalue("gbar_nattxs","soma.gbar_nattxs(0.5)", 1,"soma.gbar_nattxs(0.5)", 0, 0 )
+xvalue("gbar_nav1p8","soma.gbar_nav1p8(0.5)", 1,"soma.gbar_nav1p8(0.5)", 0, 0 )
+xvalue("gbar_nav1p9","soma.gbar_nav1p9(0.5)", 1,"soma.gbar_nav1p9(0.5)", 0, 0 )
+xvalue("gbar_kaslow","soma.gbar_kaslow(0.5)", 1,"soma.gbar_kaslow(0.5)", 0, 0 )
+xvalue("gbar_kdr","soma.gbar_kdr(0.5)", 1,"soma.gbar_kdr(0.5)", 0, 0 )
+xvalue("gbar_kmtype","soma.gbar_kmtype(0.5)", 1,"soma.gbar_kmtype(0.5)", 0, 0 )
+xvalue("gbar_knatype","soma.gbar_knatype(0.5)", 1,"soma.gbar_knatype(0.5)", 0, 0 )
+xvalue("gbarfast_hcn ","soma.gbarfast_hcn(0.5)", 1,"gbarfast_hcn(0.5)", 0, 0 )
+xvalue("gbarslow_hcn ","soma.gbarslow_hcn(0.5)", 1,"gbarslow_hcn(0.5)", 0, 0 )
+xvalue("gkbar_Kv14","soma.gkbar_Kv14(0.5)", 1,"soma.gkbar_Kv14(0.5)", 0, 0 )
+xvalue("gbar_Kv1","soma.gbar_Kv1(0.5)", 1,"soma.gbar_Kv1(0.5)", 0, 0 )
+xvalue("gbar_bkca","soma.gbar_bkca(0.5)", 1,"soma.gbar_bkca(0.5)", 0, 0 )
+
+xvalue("pmax_CaT","soma.pmax_CaT(0.5)", 1,"soma.pmax_CaT(0.5)", 0, 0 )
+xvalue("pmax_CaL","soma.pmax_CaL(0.5)", 1,"soma.pmax_CaL(0.5)", 0, 0 )
+xvalue("pmax_CaN","soma.pmax_CaN(0.5)", 1,"soma.pmax_CaN(0.5)", 0, 0 )
+xvalue("pmax_CaPQ","soma.pmax_CaPQ(0.5)", 1,"soma.pmax_CaPQ(0.5)", 0, 0 )
+xvalue("pmax_CaR","soma.pmax_CaR(0.5)", 1,"soma.pmax_CaR(0.5)", 0, 0 )
+xvalue("gbar_cacc","soma.gbar_cacc(0.5)", 1,"soma.gbar_cacc(0.5)", 0, 0 )
+xvalue("gbar_nakpump","soma.gbar_nakpump(0.5)", 1,"soma.gbar_nakpump(0.5)", 0, 0 )
+xvalue("ImaxNax_ncxsoma","soma.ImaxNax_ncxsoma(0.5)", 1,"soma.ImaxNax_ncxsoma(0.5)", 0, 0 )
+xvalue("gbar_skca3","soma.gbar_skca3(0.5)", 1,"soma.gbar_skca3(0.5)", 0, 0 )
+xvalue("gbar_trpm8","soma.gbar_trpm8(0.5)", 1,"soma.gbar_trpm8(0.5)", 0, 0 )
+
+
+xpanel(1696,414)
+}
+
+
+

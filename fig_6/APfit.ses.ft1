@@ -1,0 +1,27 @@
+ParmFitness: Unnamed multiple run protocol
+	FitnessGenerator: AP
+		RegionFitness:	soma.v( 0.5 )
+
+	Parameters:
+		"soma.gbar_nav1p8( 0.5 )", 0.00173316, 1e-009, 0.09, 1, 0
+		"soma.gbar_bkca( 0.5 )", 0.085225, 1e-009, 0.09, 1, 0
+		"soma.gbar_cacc( 0.5 )", 0.0869623, 1e-009, 0.09, 1, 0
+		"soma.gbar_kaslow( 0.5 )", 0.0252365, 1e-009, 0.09, 1, 0
+		"soma.gbar_kdr( 0.5 )", 0.0868591, 1e-009, 0.09, 1, 0
+		"soma.gbar_kmtype( 0.5 )", 0.0889476, 1e-009, 0.09, 1, 0
+		"soma.gbar_knatype( 0.5 )", 0.0715739, 1e-009, 0.09, 1, 0
+		"soma.gbar_nakpump( 0.5 )", 0.0873648, 1e-009, 0.09, 1, 0
+		"soma.gbar_nattxs( 0.5 )", 0.00972327, 1e-009, 0.09, 1, 0
+		"soma.gbar_nav1p9( 0.5 )", 0.0109569, 1e-009, 0.09, 1, 0
+		"soma.gbar_skca3( 0.5 )", 0.0340696, 1e-009, 0.09, 1, 0
+		"soma.gbar_trpm8( 0.5 )", 0.0356578, 1e-009, 0.09, 1, 0
+		"soma.gbarfast_hcn( 0.5 )", 0.0846809, 1e-009, 0.09, 1, 0
+		"soma.gbarslow_hcn( 0.5 )", 0.0899975, 1e-009, 0.09, 1, 0
+		"soma.pmax_CaL( 0.5 )", 0.0865046, 1e-009, 0.09, 1, 0
+		"soma.pmax_CaN( 0.5 )", 0.0722979, 1e-009, 0.09, 1, 0
+		"soma.pmax_CaPQ( 0.5 )", 0.0709668, 1e-009, 0.09, 1, 0
+		"soma.pmax_CaR( 0.5 )", 0.00163866, 1e-009, 0.09, 1, 0
+		"soma.pmax_CaT( 0.5 )", 0.0366841, 1e-009, 0.09, 1, 0
+		"soma.pmax_soce( 0.5 )", 0.000253862, 1e-009, 0.09, 1, 0
+		"IClamp[0].del", 9.99909, 1, 10, 1, 0
+End ParmFitness
